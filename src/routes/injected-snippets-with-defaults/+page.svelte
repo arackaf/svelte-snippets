@@ -24,9 +24,7 @@
 	</div>
 {/snippet}
 
-<DisplayProduct product={searchedBook} relatedProduct={recommendedBook} {productDisplay}>
-	<h1 class="mb-5 text-3xl">Product Display Page</h1>
-</DisplayProduct>
+<DisplayProduct product={searchedBook} relatedProduct={recommendedBook} />
 
 <hr />
 
