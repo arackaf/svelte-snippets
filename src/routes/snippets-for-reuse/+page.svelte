@@ -1,4 +1,6 @@
 <script lang="ts">
+	import BasicSnippets from './BasicSnippets.svelte';
+
 	type Product = {
 		name: string;
 		url: string;
@@ -16,6 +18,8 @@
 		price: 55.49
 	});
 </script>
+
+<BasicSnippets />
 
 {#snippet productDisplay(p: Product)}
 	<div class="flex flex-row gap-3">
