@@ -1,16 +1,25 @@
 <script lang="ts">
 	import BasicSnippets from './BasicSnippets.svelte';
 
+	type Review = {
+		date: string;
+		content: string;
+	};
 	type Product = {
 		name: string;
 		url: string;
 		price: number;
+		reviews?: Review[];
 	};
 
 	let searchedBook = $state<Product>({
 		name: 'Effective TypeScript: 83 Specific Ways to Improve Your TypeScript, 2nd Edition',
 		url: 'https://m.media-amazon.com/images/I/71eWL4AqPqL._SL1500_.jpg',
-		price: 44.99
+		price: 44.99,
+		reviews: [
+			{ date: '2/14/2024', content: 'Absolutely loved this book' },
+			{ date: '6/2/2024', content: 'Even better than the first edition' }
+		]
 	});
 	let relatedProduct = $state<Product>({
 		name: 'Modern C++ Design: Generic Programming and Design Patterns Applied',
@@ -21,12 +30,27 @@
 
 <BasicSnippets />
 
-{#snippet productDisplay(p: Product)}
+{#snippet productReview(review: Review)}
 	<div class="flex flex-row gap-3">
-		<img class="max-w-[100px]" src={p.url} alt="product url" />
-		<div class="flex flex-col">
-			<h2 class="text-lg font-bold">{p.name}</h2>
-			<span class="italic">${p.price.toFixed(2)}</span>
+		<span>{review.date}</span>
+		<span>{review.content}</span>
+	</div>
+{/snippet}
+
+{#snippet productDisplay(p: Product)}
+	<div class="flex flex-col gap-3">
+		<div class="flex flex-row gap-3">
+			<img class="max-w-[100px]" src={p.url} alt="product url" />
+			<div class="flex flex-col">
+				<h2 class="text-lg font-bold">{p.name}</h2>
+				<span class="italic">${p.price.toFixed(2)}</span>
+			</div>
+		</div>
+		<h3>Reviews:</h3>
+		<div>
+			{#each p.reviews ?? [] as review}
+				{@render productReview(review)}
+			{/each}
 		</div>
 	</div>
 {/snippet}
