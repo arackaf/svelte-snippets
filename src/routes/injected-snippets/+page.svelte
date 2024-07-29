@@ -31,6 +31,7 @@
 <hr />
 
 <DisplayProduct product={searchedBook} relatedProduct={recommendedBook}>
+	<h1 class="mb-5 text-3xl">Product Display Page</h1>
 	{#snippet productDisplay(p: Product)}
 		<div class="flex flex-row gap-3">
 			<img class="max-w-[100px]" src={p.url} alt="product url" />
@@ -40,5 +41,4 @@
 			</div>
 		</div>
 	{/snippet}
-	<h1 class="mb-5 text-3xl">Product Display Page</h1>
 </DisplayProduct>
